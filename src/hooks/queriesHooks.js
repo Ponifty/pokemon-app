@@ -1,25 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import * as GQL from "../graphQL/index";
+
+const urlAPI = "https://beta.pokeapi.co/graphql/v1beta";
 
 export const useGetPokemonList = () => {
   const [pokemonList, setPokemonList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
   useEffect(() => {
-    const getPokemonList =  () => {
-       axios
-        .post("https://beta.pokeapi.co/graphql/v1beta", {
-          query: `query samplePokeAPIquery {
-          pokemon_v2_pokemon {
-            id
-            name
-          }
-        }`,
+    const getPokemonList = async () => {
+      await axios
+        .post(urlAPI, {
+          query: GQL.NAME_REQUEST,
         })
-        // .then((response) => console.log(response))
         .then((data) => setPokemonList(data.data.data.pokemon_v2_pokemon))
         .catch((error) => console.log(error));
     };
-    getPokemonList()
+    getPokemonList();
   }, []);
 
-  return pokemonList;
+  return {pokemonList, loading};
 };
