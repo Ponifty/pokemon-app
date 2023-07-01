@@ -5,7 +5,7 @@ Project's aim is to improve React Skills using an API (actual project under cons
 **Stack/Code :**
 
 - Hooks
-- API call
+- API call (Axios & GraphQL)
 - SASS
 
 
