@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PokemonList from "./PokemonList";
 import { useGetPokemonList } from "../hooks/queriesHooks";
 
 export default function HomePage() {
-  // const [pokemonName, setPokemonName] = useState("");
-  // const [pokemonInterval, setPokemonInterval] = useState(10);
-  const { pokemonList, loading } = useGetPokemonList();
-  console.log(pokemonList);
-  console.log(loading);
+  const { pokemonList } = useGetPokemonList();
 
   return (
     <article className="home-page">
