@@ -3,7 +3,7 @@ import PokemonList from "./PokemonList";
 import { useGetPokemonList } from "../hooks/queriesHooks";
 
 export default function HomePage() {
-  const { pokemonList } = useGetPokemonList();
+  const { pokemonList, loading } = useGetPokemonList();
 
   return (
     <article className="home-page">
@@ -18,7 +18,7 @@ export default function HomePage() {
           onChange={(e) => setPokemonName(e.target.value)}
         />
       </form> */}
-      <PokemonList pokemon={pokemonList} />
+      {!loading ? <PokemonList pokemon={pokemonList} /> : <p>Loading...</p>}
     </article>
   );
 }
