@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 
 const ACTIONS = {
   INCREMENT: "increment",
@@ -40,31 +40,48 @@ const indexCounterReducer = (indexCounter, action) => {
   }
 };
 
-export default function PokemonList({ pokemon }) {
+export default function PokemonList({ pokemon, handleSelectedPokemon }) {
   const [indexCounter, dispatch] = useReducer(indexCounterReducer, {
     min: 0,
-    max: 9,
+    max: 10,
     count: 10,
   });
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      {pokemon.slice(indexCounter.min, indexCounter.max).map((p) => (
-        <div key={p.id}>
-          <span>{p.id}</span>
-          <p>{p.name}</p>
-        </div>
-      ))}
-      <button onClick={() => dispatch({ type: ACTIONS.DECREMENT })}>
-        prev
-      </button>
-      <button
-        onClick={() =>
-          dispatch({ type: ACTIONS.INCREMENT, maxLength: pokemon.length - 1 })
-        }
-      >
-        next
-      </button>
+      <form>
+        <input
+          type="text"
+          placeholder="Chercher un pokemon"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </form>
+      {pokemon
+        .filter((value) => {
+          return value.name.includes(search);
+        })
+        .slice(indexCounter.min, indexCounter.max)
+        .map((p) => (
+          <p key={p.id} onClick={handleSelectedPokemon(p)}>
+            {p.name}
+          </p>
+        ))}
+      {!search ? (
+        <button onClick={() => dispatch({ type: ACTIONS.DECREMENT })}>
+          prev
+        </button>
+      ) : null}
+      {!search ? (
+        <button
+          onClick={() =>
+            dispatch({ type: ACTIONS.INCREMENT, maxLength: pokemon.length - 1 })
+          }
+        >
+          next
+        </button>
+      ) : null}
     </>
   );
 }

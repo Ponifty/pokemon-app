@@ -7,13 +7,25 @@ export default function HomePage() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const { pokemonList, loading } = useGetPokemonList();
 
+  const handleSelectedPokemon = (pokemon) => {
+    return () => {
+      setSelectedPokemon(pokemon);
+    };
+  };
+
   return (
     <article className="home-page">
       <h1>Home Page</h1>
       {selectedPokemon ? (
-        <PokemonCard />
+        <PokemonCard
+          pokemon={selectedPokemon}
+          clearHandler={() => setSelectedPokemon(null)}
+        />
       ) : !loading ? (
-        <PokemonList pokemon={pokemonList} />
+        <PokemonList
+          pokemon={pokemonList}
+          handleSelectedPokemon={handleSelectedPokemon}
+        />
       ) : (
         <p>Loading...</p>
       )}
