@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
-import HomePage from "./components/HomePage";
+import PokemonPage from "./components/PokemonPage";
 import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
   return (
     <ErrorBoundary fallback={<div>Error...</div>}>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/" element={<PokemonPage />} />
       </Routes>
     </ErrorBoundary>
   );

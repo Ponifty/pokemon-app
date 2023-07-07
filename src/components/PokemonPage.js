@@ -3,7 +3,7 @@ import PokemonList from "./PokemonList";
 import { useGetPokemonList } from "../hooks/queriesHooks";
 import PokemonCard from "./PokemonCard";
 
-export default function HomePage() {
+export default function PokemonPage() {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const { pokemonList, loading } = useGetPokemonList();
 
@@ -14,7 +14,7 @@ export default function HomePage() {
   };
 
   return (
-    <article className="home-page">
+    <article className="pokemon-page">
       {selectedPokemon ? (
         <PokemonCard
           pokemon={selectedPokemon}
