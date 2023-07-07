@@ -14,7 +14,7 @@ export const useGetPokemonList = () => {
     const getPokemonList = async () => {
       await axios
         .post(urlAPI, {
-          query: GQL.NAME_REQUEST,
+          query: GQL.INFOS_REQUEST,
           signal: controller.signal,
         })
         .then((data) => {
